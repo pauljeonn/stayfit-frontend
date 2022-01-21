@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Faster+One&family=Fredoka+One&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Rampart+One&family=Strait&display=swap');
+
 body {
 	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
