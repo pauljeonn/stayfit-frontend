@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { exerciseData } from '../data';
+import ExerciseCard from '../components/ExerciseCard';
 
 const Container = styled.div`
 	width: 100%;
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
 	width: 500px;
 	height: 800px;
 	background-color: lightblue;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -25,6 +28,9 @@ const ItemClock = styled.div`
 	color: white;
 `;
 
+const ExerciseList = styled.div``;
+
+// 메인 페이지 컴포넌트
 const MainPage = () => {
 	const [date, setDate] = useState(new Date());
 
@@ -44,8 +50,19 @@ const MainPage = () => {
 		<Container>
 			<Wrapper>
 				<h1>MAIN</h1>
-				{/* dayjs 활용하여 시간 포맷 설정하기 */}
+				{/* dayjs 활용하여 현재 시간 포맷 설정하기 */}
 				<ItemClock>{dayjs(date).format('h:mm A')}</ItemClock>
+				<ExerciseList>
+					{exerciseData.map((item) => {
+						// 운동 요일이 오늘 요일과 일치하면 리스트에 보여주기
+						if (item.days.includes(Number(dayjs(date).format('d')))) {
+							return (
+								<ExerciseCard type={item.type} desc={item.desc}></ExerciseCard>
+							);
+						}
+						return null;
+					})}
+				</ExerciseList>
 			</Wrapper>
 		</Container>
 	);
