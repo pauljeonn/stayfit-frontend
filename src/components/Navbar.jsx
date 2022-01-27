@@ -32,7 +32,9 @@ const Navbar = () => {
 			<NavbarItem>
 				<StyledLink to="/">홈</StyledLink>
 			</NavbarItem>
-			<NavbarItem>세팅</NavbarItem>
+			<NavbarItem>
+				<StyledLink to="/settings">세팅</StyledLink>
+			</NavbarItem>
 		</Container>
 	);
 };
