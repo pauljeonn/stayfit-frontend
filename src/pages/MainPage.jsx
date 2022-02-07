@@ -54,10 +54,13 @@ const MainPage = () => {
 				<ItemClock>{dayjs(date).format('h:mm A')}</ItemClock>
 				<ExerciseList>
 					{exerciseData.map((item) => {
-						// 운동 요일이 오늘 요일과 일치하면 리스트에 보여주기
-						if (item.days.includes(Number(dayjs(date).format('d')))) {
+						// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기
+						if (item.days[Number(dayjs(date).format('d'))]) {
 							return (
-								<ExerciseCard type={item.type} desc={item.desc}></ExerciseCard>
+								<ExerciseCard
+									title={item.title}
+									desc={item.desc}
+								></ExerciseCard>
 							);
 						}
 						return null;

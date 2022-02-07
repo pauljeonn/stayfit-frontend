@@ -41,7 +41,7 @@ const ExerciseDetail = styled.div`
 	color: ${(props) => (props.isChecked ? 'darkgray' : 'black')};
 `;
 
-const ExerciseCard = ({ type, desc }) => {
+const ExerciseCard = ({ title, desc }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	const toggleCheckbox = () => {
@@ -56,7 +56,7 @@ const ExerciseCard = ({ type, desc }) => {
 				</CheckboxIcon>
 			</Checkbox>
 			<ExerciseDetail isChecked={isChecked}>
-				<div>{type}</div>
+				<div>{title}</div>
 				<div>{desc}</div>
 			</ExerciseDetail>
 		</Container>

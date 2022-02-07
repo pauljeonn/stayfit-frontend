@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import EditCard from '../components/EditCard';
 import { exerciseData } from '../data';
@@ -22,20 +23,98 @@ const Wrapper = styled.div`
 	padding: 30px;
 `;
 
+const BackBtn = styled.button``;
+
 const Title = styled.h1``;
 
-const ExerciseList = styled.div``;
+const ExerciseLabel = styled.label`
+	margin-bottom: 5px;
+`;
+
+const ExerciseInput = styled.input`
+	height: 30px;
+	padding-left: 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: #d0d0d0;
+	margin-bottom: 20px;
+`;
+
+const ExerciseDays = styled.div`
+	display: flex;
+`;
+
+const ExerciseDay = styled.div`
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 14px;
+	background-color: ${(props) => (props.isSelected ? '#3939ff' : 'white')};
+	color: ${(props) => (props.isSelected ? 'white' : 'black')};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+`;
 
 const EditPage = () => {
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const [title, setTitle] = useState(location.state.title);
+	const [desc, setDesc] = useState(location.state.desc);
+	const [days, setDays] = useState(location.state.days);
+	const dayNames = {
+		0: '일',
+		1: '월',
+		2: '화',
+		3: '수',
+		4: '목',
+		5: '금',
+		6: '토',
+	};
+	const [strDays, setStrDays] = useState(JSON.stringify(days));
+
+	const changeTitle = (e) => {
+		setTitle(e.target.value);
+	};
+
+	const changeDesc = (e) => {
+		setDesc(e.target.value);
+	};
+
+	const toggleDay = (key) => {
+		// days 상태의 불변성을 지키기 위해 temp 변수 생성
+		let temp = days;
+		temp[key] = !temp[key];
+		setDays(temp);
+		setStrDays(JSON.stringify(temp));
+		console.log('days: ', days);
+	};
+
 	return (
 		<Container>
 			<Wrapper>
-				<Title>Edit Exercises</Title>
-				<ExerciseList>
-					{exerciseData.map((item) => (
-						<EditCard type={item.type} desc={item.desc} />
+				<BackBtn onClick={() => navigate(-1)}>BACK</BackBtn>
+				<Title>EDIT</Title>
+				<ExerciseLabel>운동</ExerciseLabel>
+				<ExerciseInput value={title} onChange={changeTitle} />
+				<ExerciseLabel>설명</ExerciseLabel>
+				<ExerciseInput value={desc} onChange={changeDesc} />
+				<ExerciseLabel>요일</ExerciseLabel>
+				<ExerciseDays>
+					{Object.keys(dayNames).map((key) => (
+						<ExerciseDay
+							key={key}
+							isSelected={days[key]}
+							onClick={() => toggleDay(key)}
+						>
+							{dayNames[key]}
+						</ExerciseDay>
 					))}
-				</ExerciseList>
+				</ExerciseDays>
 			</Wrapper>
 		</Container>
 	);

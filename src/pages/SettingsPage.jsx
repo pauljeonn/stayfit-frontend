@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import SettingsItem from '../components/SettingsItem';
+import { exerciseData } from '../data';
+import EditCard from '../components/EditCard';
 
 const Container = styled.div`
 	width: 100%;
@@ -21,11 +22,20 @@ const Wrapper = styled.div`
 	padding: 30px;
 `;
 
+const Title = styled.h1``;
+
+const ExerciseList = styled.div``;
+
 const SettingsPage = () => {
 	return (
 		<Container>
 			<Wrapper>
-				<SettingsItem title="운동 수정하기" path="/edit" />
+				<Title>Edit Exercises</Title>
+				<ExerciseList>
+					{exerciseData.map((item) => (
+						<EditCard key={item.id} item={item} />
+					))}
+				</ExerciseList>
 			</Wrapper>
 		</Container>
 	);

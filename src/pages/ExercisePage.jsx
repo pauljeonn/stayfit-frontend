@@ -26,7 +26,7 @@ const ExercisePage = () => {
 		<Container>
 			<Wrapper>
 				{exerciseData.map((item) => (
-					<ExerciseCard type={item.type} count={item.count} />
+					<ExerciseCard key={item.id} type={item.type} count={item.count} />
 				))}
 			</Wrapper>
 		</Container>

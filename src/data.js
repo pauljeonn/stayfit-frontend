@@ -1,20 +1,20 @@
 export const exerciseData = [
 	{
 		id: 1,
-		type: '팔굽혀펴기',
+		title: '팔굽혀펴기',
 		desc: '40개',
-		days: [0, 1, 2, 3, 4, 5, 6],
+		days: [true, true, true, true, true, true, true],
 	},
 	{
 		id: 2,
-		type: '스쿼트',
+		title: '스쿼트',
 		desc: '60개',
-		days: [0, 1, 2, 3, 4, 5, 6],
+		days: [false, false, true, false, true, false, true],
 	},
 	{
 		id: 3,
-		type: '달리기',
+		title: '달리기',
 		desc: '3km',
-		days: [2, 4],
+		days: [false, true, false, true, false, true, false],
 	},
 ];
