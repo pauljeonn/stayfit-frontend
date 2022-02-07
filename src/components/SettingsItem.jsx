@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -14,8 +15,17 @@ const Container = styled.div`
 	justify-content: center;
 `;
 
-const SettingsItem = ({ title }) => {
-	return <Container>{title}</Container>;
+const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: white;
+`;
+
+const SettingsItem = ({ title, path }) => {
+	return (
+		<StyledLink to={path}>
+			<Container>{title}</Container>
+		</StyledLink>
+	);
 };
 
 export default SettingsItem;
