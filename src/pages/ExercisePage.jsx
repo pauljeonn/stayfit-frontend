@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ExerciseCard from '../components/ExerciseCard';
 import { exerciseData } from '../data';
+import axios from 'axios';
 
 const Container = styled.div`
 	width: 100%;
@@ -22,6 +23,14 @@ const Wrapper = styled.div`
 `;
 
 const ExercisePage = () => {
+	useEffect(() => {
+		const fetchExercises = async () => {
+			const res = await axios.get('exercises');
+			console.log(res);
+		};
+		fetchExercises();
+	}, []);
+
 	return (
 		<Container>
 			<Wrapper>

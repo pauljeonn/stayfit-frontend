@@ -58,6 +58,7 @@ const MainPage = () => {
 						if (item.days[Number(dayjs(date).format('d'))]) {
 							return (
 								<ExerciseCard
+									key={item.id}
 									title={item.title}
 									desc={item.desc}
 								></ExerciseCard>

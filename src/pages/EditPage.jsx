@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import EditCard from '../components/EditCard';
-import { exerciseData } from '../data';
 
 const Container = styled.div`
 	width: 100%;
@@ -59,6 +57,10 @@ const ExerciseDay = styled.div`
 	cursor: pointer;
 `;
 
+const SaveBtn = styled.button`
+	margin-top: 30px;
+`;
+
 const EditPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -79,6 +81,7 @@ const EditPage = () => {
 
 	const changeTitle = (e) => {
 		setTitle(e.target.value);
+		
 	};
 
 	const changeDesc = (e) => {
@@ -90,8 +93,7 @@ const EditPage = () => {
 		let temp = days;
 		temp[key] = !temp[key];
 		setDays(temp);
-		setStrDays(JSON.stringify(temp));
-		console.log('days: ', days);
+		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
 	return (
@@ -115,6 +117,7 @@ const EditPage = () => {
 						</ExerciseDay>
 					))}
 				</ExerciseDays>
+				<SaveBtn>SAVE</SaveBtn>
 			</Wrapper>
 		</Container>
 	);
