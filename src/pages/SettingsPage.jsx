@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import EditCard from '../components/EditCard';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -24,9 +25,15 @@ const Wrapper = styled.div`
 
 const Title = styled.h1``;
 
+const AddButton = styled.button`
+	margin-bottom: 10px;
+`;
+
 const ExerciseList = styled.div``;
 
 const SettingsPage = () => {
+	const navigate = useNavigate();
+
 	const [exercises, setExercises] = useState([]);
 
 	useEffect(() => {
@@ -41,9 +48,10 @@ const SettingsPage = () => {
 		<Container>
 			<Wrapper>
 				<Title>Edit Exercises</Title>
+				<AddButton onClick={() => navigate('/add')}>운동 추가</AddButton>
 				<ExerciseList>
 					{exercises.map((item) => (
-						<EditCard key={item.id} item={item} />
+						<EditCard key={item._id} item={item} />
 					))}
 				</ExerciseList>
 			</Wrapper>
