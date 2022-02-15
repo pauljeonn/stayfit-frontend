@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Container = styled.div`
 	width: 100%;
@@ -20,8 +21,6 @@ const Wrapper = styled.div`
 	align-items: center;
 	padding: 30px;
 `;
-
-const BackBtn = styled.button``;
 
 const Title = styled.h1``;
 
@@ -57,9 +56,13 @@ const ExerciseDay = styled.div`
 	cursor: pointer;
 `;
 
-const SaveBtn = styled.button`
+const Buttons = styled.div`
 	margin-top: 30px;
 `;
+
+const CancelBtn = styled.button``;
+
+const SaveBtn = styled.button``;
 
 const EditPage = () => {
 	const navigate = useNavigate();
@@ -81,7 +84,6 @@ const EditPage = () => {
 
 	const changeTitle = (e) => {
 		setTitle(e.target.value);
-		
 	};
 
 	const changeDesc = (e) => {
@@ -96,10 +98,27 @@ const EditPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
+	const handleSave = async () => {
+		console.log(title, desc, location.state);
+		const editedExercise = {
+			title,
+			desc,
+			days,
+		};
+		console.log(editedExercise);
+		try {
+			// 수정된 운동 데이터 업데이트 요청
+			await axios.put(`/exercises/${location.state._id}`, editedExercise);
+			// 운동 수정 완료 후 settings 페이지로 이동
+			navigate('/settings');
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<Container>
 			<Wrapper>
-				<BackBtn onClick={() => navigate(-1)}>BACK</BackBtn>
 				<Title>EDIT</Title>
 				<ExerciseLabel>운동</ExerciseLabel>
 				<ExerciseInput value={title} onChange={changeTitle} />
@@ -117,7 +136,10 @@ const EditPage = () => {
 						</ExerciseDay>
 					))}
 				</ExerciseDays>
-				<SaveBtn>SAVE</SaveBtn>
+				<Buttons>
+					<CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
+					<SaveBtn onClick={handleSave}>저장</SaveBtn>
+				</Buttons>
 			</Wrapper>
 		</Container>
 	);

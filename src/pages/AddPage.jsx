@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -64,6 +65,8 @@ const SaveBtn = styled.button`
 `;
 
 const AddPage = () => {
+	const navigate = useNavigate();
+
 	const [title, setTitle] = useState('');
 	const [desc, setDesc] = useState('');
 	const [days, setDays] = useState([
@@ -103,8 +106,9 @@ const AddPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
-	const saveExercise = async () => {
+	const handleSave = async () => {
 		const newExercise = {
+			userId: 1,
 			title,
 			desc,
 			days,
@@ -147,8 +151,8 @@ const AddPage = () => {
 					))}
 				</ExerciseDays>
 				<Buttons>
-					<CancelBtn>취소</CancelBtn>
-					<SaveBtn onClick={saveExercise}>저장</SaveBtn>
+					<CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
+					<SaveBtn onClick={handleSave}>저장</SaveBtn>
 				</Buttons>
 			</Wrapper>
 		</Container>
