@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { exerciseData } from '../data';
 import EditCard from '../components/EditCard';
+import axios from 'axios';
 
 const Container = styled.div`
 	width: 100%;
@@ -27,12 +27,22 @@ const Title = styled.h1``;
 const ExerciseList = styled.div``;
 
 const SettingsPage = () => {
+	const [exercises, setExercises] = useState([]);
+
+	useEffect(() => {
+		const fetchExercises = async () => {
+			const res = await axios.get('exercises');
+			setExercises(res.data);
+		};
+		fetchExercises();
+	}, []);
+
 	return (
 		<Container>
 			<Wrapper>
 				<Title>Edit Exercises</Title>
 				<ExerciseList>
-					{exerciseData.map((item) => (
+					{exercises.map((item) => (
 						<EditCard key={item.id} item={item} />
 					))}
 				</ExerciseList>
