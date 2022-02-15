@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -102,8 +103,19 @@ const AddPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
-	const saveExercise = () => {
-		console.log(title, desc, days);
+	const saveExercise = async () => {
+		const newExercise = {
+			title,
+			desc,
+			days,
+		};
+		console.log(newExercise);
+
+		try {
+			await axios.post('exercises', newExercise);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	return (
