@@ -19,12 +19,32 @@ export const exerciseSlice = createSlice({
 			state.pending = false;
 			state.error = true;
 		},
-		addExercise: (state, action) => {
-			state.push(action.payload);
+		addStart: (state) => {
+			state.pending = true;
 		},
+		addSuccess: (state, action) => {
+			state.pending = false;
+			// createSlice에는 immer가 이미 적용되어있어서
+			state.exercises.push(action.payload);
+			// state.exercises = [...state.exercises, action.payload];
+			console.log('add success: ', state.exercises);
+		},
+		addError: (state) => {
+			state.pending = false;
+			state.error = true;
+		},
+		// addExercise: (state, action) => {
+		// 	state.push(action.payload);
+		// },
 	},
 });
 
-export const { getStart, getSuccess, getError, addExercise } =
-	exerciseSlice.actions;
+export const {
+	getStart,
+	getSuccess,
+	getError,
+	addStart,
+	addSuccess,
+	addError,
+} = exerciseSlice.actions;
 export default exerciseSlice.reducer;

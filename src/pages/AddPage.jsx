@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { addExercise } from '../redux/api';
 
 const Container = styled.div`
 	width: 100%;
@@ -66,6 +67,7 @@ const SaveBtn = styled.button`
 
 const AddPage = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [title, setTitle] = useState('');
 	const [desc, setDesc] = useState('');
@@ -115,11 +117,10 @@ const AddPage = () => {
 		};
 		console.log(newExercise);
 
-		try {
-			await axios.post('exercises', newExercise);
-		} catch (err) {
-			console.log(err);
-		}
+		// addExercise 액션 호출
+		addExercise(dispatch, newExercise);
+		// 운동 추가 후 SettingsPage로 이동
+		navigate(-1);
 	};
 
 	return (
