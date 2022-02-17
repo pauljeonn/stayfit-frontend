@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import ExerciseCard from '../components/ExerciseCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getExercises } from '../redux/api';
 
 const Container = styled.div`
 	width: 100%;
@@ -32,12 +34,27 @@ const ExerciseList = styled.div``;
 
 // 메인 페이지 컴포넌트
 const MainPage = () => {
+	// 로컬 상태
 	const [exercises, setExercises] = useState([]);
 	const [date, setDate] = useState(new Date());
 
-	const refreshClock = () => {
-		setDate(new Date());
-	};
+	// 글로벌 state 및 dispatch
+	const exerciseState = useSelector((state) => state.exercise.exercises);
+	const dispatch = useDispatch();
+
+	// 운동 데이터 가져오기
+	useEffect(() => {
+		// useEffect를 비동기로 호출하지 못하므로 비동기 함수 생성 및 호출
+		const fetchExercises = async () => {
+			await getExercises(dispatch);
+		};
+		// exerciseState가 비어있으면 데이터 불러오기
+		if (!exerciseState.length) {
+			fetchExercises();
+		} else {
+			setExercises(exerciseState);
+		}
+	}, [exerciseState, dispatch]);
 
 	// 시간 표시
 	useEffect(() => {
@@ -48,16 +65,10 @@ const MainPage = () => {
 		};
 	}, []);
 
-	// 운동 데이터 가져오기
-	useEffect(() => {
-		// useEffect를 비동기로 호출하지 못하므로 비동기 함수 생성 및 호출
-		const fetchExercises = async () => {
-			const res = await axios.get('exercises');
-			console.log(res);
-			setExercises(res.data);
-		};
-		fetchExercises();
-	}, []);
+	// refreshClock 함수
+	const refreshClock = () => {
+		setDate(new Date());
+	};
 
 	return (
 		<Container>
