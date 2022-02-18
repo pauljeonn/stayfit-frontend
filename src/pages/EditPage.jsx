@@ -98,6 +98,7 @@ const EditPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
+	// 운동 저장
 	const handleSave = async () => {
 		console.log(title, desc, location.state);
 		const editedExercise = {
@@ -115,6 +116,9 @@ const EditPage = () => {
 			console.log(err);
 		}
 	};
+
+	// 운동 삭제
+	const handleDelete = () => {};
 
 	return (
 		<Container>

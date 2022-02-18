@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { addExercise } from '../redux/api';
+import { addExercise } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
@@ -115,10 +115,9 @@ const AddPage = () => {
 			desc,
 			days,
 		};
-		console.log(newExercise);
 
 		// addExercise 액션 호출
-		addExercise(dispatch, newExercise);
+		dispatch(addExercise(newExercise));
 		// 운동 추가 후 SettingsPage로 이동
 		navigate(-1);
 	};

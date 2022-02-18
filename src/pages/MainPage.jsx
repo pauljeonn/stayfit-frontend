@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import axios from 'axios';
 import ExerciseCard from '../components/ExerciseCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { getExercises } from '../redux/api';
+import { getExercises } from '../redux/exercise';
+// import { getExercises } from '../redux/api';
 
 const Container = styled.div`
 	width: 100%;
@@ -34,27 +34,24 @@ const ExerciseList = styled.div``;
 
 // 메인 페이지 컴포넌트
 const MainPage = () => {
-	// 로컬 상태
+	const dispatch = useDispatch();
+
+	// 로컬 state
 	const [exercises, setExercises] = useState([]);
 	const [date, setDate] = useState(new Date());
 
-	// 글로벌 state 및 dispatch
+	// 글로벌 state
 	const exerciseState = useSelector((state) => state.exercise.exercises);
-	const dispatch = useDispatch();
 
 	// 운동 데이터 가져오기
 	useEffect(() => {
-		// useEffect를 비동기로 호출하지 못하므로 비동기 함수 생성 및 호출
-		const fetchExercises = async () => {
-			await getExercises(dispatch);
-		};
 		// exerciseState가 비어있으면 데이터 불러오기
 		if (!exerciseState.length) {
-			fetchExercises();
+			dispatch(getExercises()); // dispatch thunk
 		} else {
 			setExercises(exerciseState);
 		}
-	}, [exerciseState, dispatch]);
+	}, [dispatch, exerciseState]);
 
 	// 시간 표시
 	useEffect(() => {
