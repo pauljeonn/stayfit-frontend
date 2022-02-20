@@ -6,7 +6,6 @@ export const getExercises = createAsyncThunk(
 	'exercise/getExercises',
 	async () => {
 		const res = await axios.get('http://localhost:3000/exercises');
-		console.log(res);
 		return res.data;
 	}
 );
@@ -25,10 +24,9 @@ export const addExercise = createAsyncThunk(
 export const deleteExercise = createAsyncThunk(
 	'exercise/deleteExercise',
 	async (exerciseId) => {
-		const res = await axios.delete(
-			`http://localhost:3000/exercises/${exerciseId}`,
-			exerciseId
-		);
+		await axios.delete(`http://localhost:3000/exercises/${exerciseId}`);
+		// 운동 삭제 후 변경된 exercises 불러오기
+		const res = await axios.get('http://localhost:3000/exercises');
 		return res.data;
 	}
 );
@@ -72,8 +70,7 @@ export const exerciseSlice = createSlice({
 		},
 		[deleteExercise.fulfilled]: (state, action) => {
 			state.pending = false;
-			state.exercises.filter((exercise) => exercise._id !== action.payload);
-			console.log(action.payload);
+			state.exercises = action.payload;
 		},
 		[deleteExercise.rejected]: (state) => {
 			state.pending = false;

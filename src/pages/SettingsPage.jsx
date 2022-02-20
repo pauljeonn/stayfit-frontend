@@ -44,6 +44,7 @@ const SettingsPage = () => {
 
 	// 운동 데이터 가져오기
 	useEffect(() => {
+		console.log(exerciseState);
 		// exerciseState가 비어있으면 데이터 불러오기
 		if (!exerciseState.length) {
 			dispatch(getExercises());

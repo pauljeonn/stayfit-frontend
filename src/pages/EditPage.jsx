@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteExercise, getExercises } from '../redux/exercise';
+import { useDispatch } from 'react-redux';
+import { deleteExercise } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
@@ -89,8 +89,6 @@ const EditPage = () => {
 	};
 	const [strDays, setStrDays] = useState(JSON.stringify(days));
 
-	const exerciseState = useSelector((state) => state.exercise.exercises);
-
 	const changeTitle = (e) => {
 		setTitle(e.target.value);
 	};
@@ -109,13 +107,11 @@ const EditPage = () => {
 
 	// 운동 저장
 	const handleSave = async () => {
-		console.log(title, desc, location.state);
 		const editedExercise = {
 			title,
 			desc,
 			days,
 		};
-		console.log(editedExercise);
 		try {
 			// 수정된 운동 데이터 업데이트 요청
 			await axios.put(`/exercises/${location.state._id}`, editedExercise);
@@ -128,12 +124,9 @@ const EditPage = () => {
 
 	// 운동 삭제
 	const handleDelete = async () => {
-		console.log(location.state._id);
 		try {
-			await axios.delete(`/exercises/${location.state._id}`);
-			// 운동 삭제 후 SettingsPage로 이동
-			dispatch(getExercises());
-			await console.log(exerciseState);
+			dispatch(deleteExercise(location.state._id));
+			// SettingsPage로 이동
 			navigate(-1);
 		} catch (err) {
 			console.log(err);
