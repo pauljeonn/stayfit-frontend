@@ -21,13 +21,19 @@ export const addExercise = createAsyncThunk(
 	}
 );
 
+// export const editExercise = createAsyncThunk(
+// 	'exercise/editExercise',
+// 	aysnc (exerciseId) => {
+// 		await axios.put(`http://localhost:3000/exercises/${exerciseId}`);
+// 		// 운동 수정 후
+// 	}
+// )
+
 export const deleteExercise = createAsyncThunk(
 	'exercise/deleteExercise',
 	async (exerciseId) => {
 		await axios.delete(`http://localhost:3000/exercises/${exerciseId}`);
-		// 운동 삭제 후 변경된 exercises 불러오기
-		const res = await axios.get('http://localhost:3000/exercises');
-		return res.data;
+		return exerciseId;
 	}
 );
 
@@ -70,7 +76,9 @@ export const exerciseSlice = createSlice({
 		},
 		[deleteExercise.fulfilled]: (state, action) => {
 			state.pending = false;
-			state.exercises = action.payload;
+			state.exercises = state.exercises.filter(
+				(exercise) => exercise._id !== action.payload
+			);
 		},
 		[deleteExercise.rejected]: (state) => {
 			state.pending = false;
