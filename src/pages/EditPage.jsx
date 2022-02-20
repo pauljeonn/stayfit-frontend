@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { deleteExercise } from '../redux/exercise';
+import { deleteExercise, editExercise } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
@@ -106,15 +106,18 @@ const EditPage = () => {
 	};
 
 	// 운동 저장
-	const handleSave = async () => {
+	const handleSave = () => {
 		const editedExercise = {
+			userId: 1,
 			title,
 			desc,
 			days,
 		};
+
 		try {
 			// 수정된 운동 데이터 업데이트 요청
-			await axios.put(`/exercises/${location.state._id}`, editedExercise);
+			// await axios.put(`/exercises/${location.state._id}`, editedExercise);
+			dispatch(editExercise([location.state._id, editedExercise]));
 			// 운동 수정 완료 후 settings 페이지로 이동
 			navigate('/settings');
 		} catch (err) {
@@ -123,7 +126,7 @@ const EditPage = () => {
 	};
 
 	// 운동 삭제
-	const handleDelete = async () => {
+	const handleDelete = () => {
 		try {
 			dispatch(deleteExercise(location.state._id));
 			// SettingsPage로 이동

@@ -21,13 +21,16 @@ export const addExercise = createAsyncThunk(
 	}
 );
 
-// export const editExercise = createAsyncThunk(
-// 	'exercise/editExercise',
-// 	aysnc (exerciseId) => {
-// 		await axios.put(`http://localhost:3000/exercises/${exerciseId}`);
-// 		// 운동 수정 후
-// 	}
-// )
+export const editExercise = createAsyncThunk(
+	'exercise/editExercise',
+	async (requestData) => {
+		const res = await axios.put(
+			`http://localhost:3000/exercises/${requestData[0]}`,
+			requestData[1]
+		);
+		return res.data;
+	}
+);
 
 export const deleteExercise = createAsyncThunk(
 	'exercise/deleteExercise',
@@ -67,6 +70,21 @@ export const exerciseSlice = createSlice({
 			state.exercises.push(action.payload);
 		},
 		[addExercise.rejected]: (state) => {
+			state.pending = false;
+			state.error = true;
+		},
+		[editExercise.pending]: (state) => {
+			state.pending = true;
+			state.error = false;
+		},
+		[editExercise.fulfilled]: (state, action) => {
+			state.pending = false;
+			// 수정된 운동만 변경하기
+			state.exercises = state.exercises.map((exercise) =>
+				exercise._id === action.payload._id ? action.payload : exercise
+			);
+		},
+		[editExercise.rejected]: (state) => {
 			state.pending = false;
 			state.error = true;
 		},

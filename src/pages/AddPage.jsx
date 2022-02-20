@@ -108,7 +108,7 @@ const AddPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
-	const handleSave = async () => {
+	const handleSave = () => {
 		const newExercise = {
 			userId: 1,
 			title,
