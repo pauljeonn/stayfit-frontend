@@ -17,7 +17,7 @@ function App() {
 					<Route path="/exercise" element={<ExercisePage />} />
 					<Route path="/settings" element={<SettingsPage />} />
 					<Route path="/add" element={<AddPage />} />
-					<Route path="/edit" element={<EditPage />} />
+					<Route path="/edit/:id" element={<EditPage />} />
 				</Routes>
 				<Navbar />
 			</BrowserRouter>

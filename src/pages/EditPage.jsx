@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteExercise, getExercises } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
@@ -64,9 +66,14 @@ const CancelBtn = styled.button``;
 
 const SaveBtn = styled.button``;
 
+const DeleteBtn = styled.button`
+	margin-top: 40px;
+`;
+
 const EditPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const dispatch = useDispatch();
 
 	const [title, setTitle] = useState(location.state.title);
 	const [desc, setDesc] = useState(location.state.desc);
@@ -81,6 +88,8 @@ const EditPage = () => {
 		6: '토',
 	};
 	const [strDays, setStrDays] = useState(JSON.stringify(days));
+
+	const exerciseState = useSelector((state) => state.exercise.exercises);
 
 	const changeTitle = (e) => {
 		setTitle(e.target.value);
@@ -118,7 +127,18 @@ const EditPage = () => {
 	};
 
 	// 운동 삭제
-	const handleDelete = () => {};
+	const handleDelete = async () => {
+		console.log(location.state._id);
+		try {
+			await axios.delete(`/exercises/${location.state._id}`);
+			// 운동 삭제 후 SettingsPage로 이동
+			dispatch(getExercises());
+			await console.log(exerciseState);
+			navigate(-1);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<Container>
@@ -144,6 +164,7 @@ const EditPage = () => {
 					<CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
 					<SaveBtn onClick={handleSave}>저장</SaveBtn>
 				</Buttons>
+				<DeleteBtn onClick={handleDelete}>운동 삭제</DeleteBtn>
 			</Wrapper>
 		</Container>
 	);

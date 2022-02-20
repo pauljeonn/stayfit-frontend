@@ -33,7 +33,7 @@ const EditCard = ({ item }) => {
 	return (
 		<Container>
 			<ExerciseDetail>{item.title}</ExerciseDetail>
-			<EditIcon onClick={() => navigate('/edit', { state: item })}>
+			<EditIcon onClick={() => navigate(`/edit/${item._id}`, { state: item })}>
 				<AiOutlineEdit />
 			</EditIcon>
 		</Container>
