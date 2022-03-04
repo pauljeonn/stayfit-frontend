@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 import ExerciseCard from '../components/ExerciseCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
@@ -8,32 +9,43 @@ import { getExercises } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
-	background-color: pink;
+	height: calc(100vh - 80px - 80px);
+	background-color: #e3ffc6;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
 
 const Wrapper = styled.div`
-	width: 500px;
-	height: 800px;
-	background-color: lightblue;
+	width: 50%;
+	min-width: 400px;
+	max-width: 600px;
+	height: 100%;
 	border-radius: 10px;
+	padding: 30px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 `;
 
-const ItemClock = styled.div`
+const DateContainer = styled.div`
 	font-size: 30px;
-	color: white;
+	font-weight: 700;
+	color: #75ce75;
+	margin-bottom: 30px;
+`;
+
+const ClockContainer = styled.div`
+	font-size: 60px;
+	font-weight: 700;
+	color: #75ce75;
 `;
 
 const ExerciseList = styled.div``;
 
 // 메인 페이지 컴포넌트
 const MainPage = () => {
+	dayjs.locale('ko');
 	const dispatch = useDispatch();
 
 	// 로컬 state
@@ -70,9 +82,11 @@ const MainPage = () => {
 	return (
 		<Container>
 			<Wrapper>
-				<h1>MAIN</h1>
 				{/* dayjs 활용하여 현재 시간 포맷 설정하기 */}
-				<ItemClock>{dayjs(date).format('h:mm A')}</ItemClock>
+				<DateContainer>
+					{dayjs(date).format('YYYY년 M월 D일 dddd')}
+				</DateContainer>
+				{/* <ClockContainer>{dayjs(date).format('A h:mm')}</ClockContainer> */}
 				<ExerciseList>
 					{exercises.map((item) => {
 						// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기

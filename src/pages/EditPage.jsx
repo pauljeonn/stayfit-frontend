@@ -115,11 +115,10 @@ const EditPage = () => {
 		};
 
 		try {
-			// 수정된 운동 데이터 업데이트 요청
-			// await axios.put(`/exercises/${location.state._id}`, editedExercise);
+			// 수정된 운동 데이터 적용
 			dispatch(editExercise([location.state._id, editedExercise]));
-			// 운동 수정 완료 후 settings 페이지로 이동
-			navigate('/settings');
+			// 운동 수정 완료 후 SettingsPage로 이동
+			navigate(-1);
 		} catch (err) {
 			console.log(err);
 		}

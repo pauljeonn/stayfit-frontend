@@ -7,24 +7,38 @@ import { getExercises } from '../redux/exercise';
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
+	height: calc(100vh - 80px - 80px);
 	background-color: #cbf0b5;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 `;
 
 const Wrapper = styled.div`
 	width: 600px;
-	height: 600px;
-	background-color: white;
+	min-width: 400px;
+	max-width: 600px;
+	border: 2px solid #75ce75;
+	border-radius: 10px;
+	margin: 20px;
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 30px;
 `;
 
-const Title = styled.h1``;
+const Title = styled.div`
+	width: 400px;
+	height: 50px;
+	border-radius: 15px;
+	background-color: #75ce75;
+	color: white;
+	font-size: 26px;
+	font-weight: 500;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
 
 const AddButton = styled.button`
 	margin-bottom: 10px;
@@ -56,7 +70,7 @@ const SettingsPage = () => {
 	return (
 		<Container>
 			<Wrapper>
-				<Title>Edit Exercises</Title>
+				<Title>운동 목록</Title>
 				<AddButton onClick={() => navigate('/add')}>운동 추가</AddButton>
 				<ExerciseList>
 					{exercises.map((item) => (

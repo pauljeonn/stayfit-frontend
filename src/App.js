@@ -6,10 +6,17 @@ import Topbar from './components/Topbar';
 import SettingsPage from './pages/SettingsPage';
 import EditPage from './pages/EditPage';
 import AddPage from './pages/AddPage';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+`;
 
 function App() {
 	return (
-		<div className="App">
+		<Container>
 			<BrowserRouter>
 				<Topbar />
 				<Routes>
@@ -21,7 +28,7 @@ function App() {
 				</Routes>
 				<Navbar />
 			</BrowserRouter>
-		</div>
+		</Container>
 	);
 }
 
