@@ -48,6 +48,7 @@ const ExerciseList = styled.div``;
 // 메인 페이지 컴포넌트
 const MainPage = () => {
 	dayjs.locale('ko');
+
 	const dispatch = useDispatch();
 
 	// 로컬 state

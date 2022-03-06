@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import MainPage from './pages/MainPage';
 import ExercisePage from './pages/ExercisePage';
 import SettingsPage from './pages/SettingsPage';
@@ -15,16 +16,26 @@ const Container = styled.div`
 `;
 
 function App() {
+	const user = useSelector((state) => state.auth.user);
+
 	return (
 		<Container>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/" element={<MainPage />} />
+					<Route
+						path="/"
+						// 유저 상태 존재 유무에 따라 redirect
+						element={user ? <MainPage /> : <Navigate to="/login" />}
+					/>
 					<Route path="/exercise" element={<ExercisePage />} />
 					<Route path="/settings" element={<SettingsPage />} />
 					<Route path="/add" element={<AddPage />} />
 					<Route path="/edit/:id" element={<EditPage />} />
-					<Route path="/login" element={<LoginPage />} />
+					<Route
+						path="/login"
+						// 유저 상태 존재 유무에 따라 redirect
+						element={user ? <Navigate to="/" /> : <LoginPage />}
+					/>
 					<Route path="/register" element={<RegisterPage />} />
 				</Routes>
 			</BrowserRouter>

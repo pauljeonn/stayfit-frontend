@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/auth';
 import styled from 'styled-components';
 import { styles } from '../styles';
 
@@ -97,9 +99,23 @@ const RegisterText = styled.div`
 
 const LoginPage = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
+	const email = useRef();
+	const password = useRef();
+
+	// 유저 상태 조회
+	const user = useSelector((state) => state.auth.user);
+
+	// 로그인
 	const handleLogin = (e) => {
 		e.preventDefault();
+
+		// 로그인 액션 디스패치
+		dispatch(
+			login({ email: email.current.value, password: password.current.value })
+		);
+		console.log(user);
 	};
 
 	return (
@@ -112,8 +128,12 @@ const LoginPage = () => {
 					<LoginContainer>
 						<Logo>STAYFIT</Logo>
 						<LoginForm onSubmit={handleLogin}>
-							<LoginInput type="email" placeholder="이메일" />
-							<LoginInput type="password" placeholder="비밀번호" />
+							<LoginInput type="email" placeholder="이메일" ref={email} />
+							<LoginInput
+								type="password"
+								placeholder="비밀번호"
+								ref={password}
+							/>
 							<LoginBtn type="submit">로그인</LoginBtn>
 						</LoginForm>
 						<RegisterText onClick={() => navigate('/register')}>
