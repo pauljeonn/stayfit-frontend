@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import EditCard from '../components/EditCard';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
-import { MdAdd } from 'react-icons/md';
+import Topbar from '../components/Topbar';
+import Navbar from '../components/Navbar';
+import EditCard from '../components/EditCard';
+import styled from 'styled-components';
 import { styles } from '../styles';
+import { MdAdd } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 100%;
-	height: calc(100vh - 80px - 80px);
+	height: 100vh;
 	background-color: white;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 `;
 
 const Wrapper = styled.div`
 	width: 600px;
 	min-width: 400px;
 	max-width: 600px;
+	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
 	border: 2px solid ${styles.themeColor};
 	border-radius: 10px;
 	margin: 20px;
@@ -86,6 +91,7 @@ const SettingsPage = () => {
 
 	return (
 		<Container>
+			<Topbar />
 			<Wrapper>
 				<Title>운동 목록</Title>
 				<AddButton onClick={() => navigate('/add')}>
@@ -97,6 +103,7 @@ const SettingsPage = () => {
 					))}
 				</ExerciseList>
 			</Wrapper>
+			<Navbar />
 		</Container>
 	);
 };

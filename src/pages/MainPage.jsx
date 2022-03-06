@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-import ExerciseCard from '../components/ExerciseCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
-// import { getExercises } from '../redux/api';
+import Topbar from '../components/Topbar';
+import Navbar from '../components/Navbar';
+import ExerciseCard from '../components/ExerciseCard';
+import styled from 'styled-components';
+import { styles } from '../styles';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 const Container = styled.div`
 	width: 100%;
-	height: calc(100vh - 80px - 80px);
+	height: 100vh;
 	background-color: white;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;
@@ -20,9 +23,8 @@ const Wrapper = styled.div`
 	width: 50%;
 	min-width: 400px;
 	max-width: 600px;
-	height: 100%;
-	border-radius: 10px;
-	padding: 30px;
+	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -81,6 +83,7 @@ const MainPage = () => {
 
 	return (
 		<Container>
+			<Topbar />
 			<Wrapper>
 				{/* dayjs 활용하여 현재 시간 포맷 설정하기 */}
 				<DateContainer>
@@ -88,14 +91,14 @@ const MainPage = () => {
 				</DateContainer>
 				{/* <ClockContainer>{dayjs(date).format('A h:mm')}</ClockContainer> */}
 				<ExerciseList>
-					{exercises.map((item) => {
+					{exercises.map((exercise) => {
 						// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기
-						if (item.days[Number(dayjs(date).format('d'))]) {
+						if (exercise.days[Number(dayjs(date).format('d'))]) {
 							return (
 								<ExerciseCard
-									key={item._id}
-									title={item.title}
-									desc={item.desc}
+									key={exercise._id}
+									title={exercise.title}
+									desc={exercise.desc}
 								></ExerciseCard>
 							);
 						}
@@ -103,6 +106,7 @@ const MainPage = () => {
 					})}
 				</ExerciseList>
 			</Wrapper>
+			<Navbar />
 		</Container>
 	);
 };

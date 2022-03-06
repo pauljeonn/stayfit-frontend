@@ -5,6 +5,6 @@ export const styles = {
 	thirdColor: 'green',
 
 	// Dimensions
-	topbarHeight: '80px',
+	topbarHeight: '90px',
 	navbarHeight: '80px',
 };
