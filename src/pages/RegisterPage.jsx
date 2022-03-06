@@ -24,7 +24,7 @@ const Left = styled.div`
 	align-items: center;
 `;
 
-const LoginImage = styled.img`
+const RegisterImage = styled.img`
 	width: 75%;
 `;
 
@@ -36,7 +36,7 @@ const Right = styled.div`
 	align-items: center;
 `;
 
-const LoginContainer = styled.div`
+const RegisterContainer = styled.div`
 	background-color: white;
 	border-radius: 15px;
 	padding: 50px 80px;
@@ -52,13 +52,13 @@ const Logo = styled.div`
 	margin-bottom: 40px;
 `;
 
-const LoginForm = styled.form`
+const RegisterForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 45px;
 `;
 
-const LoginInput = styled.input`
+const RegisterInput = styled.input`
 	width: 240px;
 	height: 40px;
 	border: 2px solid ${styles.themeColor};
@@ -68,7 +68,7 @@ const LoginInput = styled.input`
 	margin-bottom: 8px;
 `;
 
-const LoginBtn = styled.button`
+const RegisterBtn = styled.button`
 	width: 240px;
 	height: 46px;
 	border: none;
@@ -85,7 +85,7 @@ const LoginBtn = styled.button`
 	}
 `;
 
-const RegisterText = styled.div`
+const LoginText = styled.div`
 	color: ${styles.themeColor};
 	font-size: 15px;
 	cursor: pointer;
@@ -95,10 +95,10 @@ const RegisterText = styled.div`
 	}
 `;
 
-const LoginPage = () => {
+const RegisterPage = () => {
 	const navigate = useNavigate();
 
-	const handleLogin = (e) => {
+	const handleRegister = (e) => {
 		e.preventDefault();
 	};
 
@@ -106,24 +106,27 @@ const LoginPage = () => {
 		<Container>
 			<Wrapper>
 				<Left>
-					<LoginImage src="/images/exercise.svg" alt="" />
+					<RegisterImage src="/images/exercise.svg" alt="" />
 				</Left>
 				<Right>
-					<LoginContainer>
+					<RegisterContainer>
 						<Logo>STAYFIT</Logo>
-						<LoginForm onSubmit={handleLogin}>
-							<LoginInput type="email" placeholder="이메일" />
-							<LoginInput type="password" placeholder="비밀번호" />
-							<LoginBtn type="submit">로그인</LoginBtn>
-						</LoginForm>
-						<RegisterText onClick={() => navigate('/register')}>
-							아직 회원이 아니신가요?
-						</RegisterText>
-					</LoginContainer>
+						<RegisterForm onSubmit={handleRegister}>
+							<RegisterInput placeholder="성" />
+							<RegisterInput placeholder="이름" />
+							<RegisterInput type="email" placeholder="이메일" />
+							<RegisterInput type="password" placeholder="비밀번호" />
+							<RegisterInput type="password" placeholder="비밀번호 확인" />
+							<RegisterBtn type="submit">회원가입</RegisterBtn>
+						</RegisterForm>
+						<LoginText onClick={() => navigate('/login')}>
+							이미 회원이신가요?
+						</LoginText>
+					</RegisterContainer>
 				</Right>
 			</Wrapper>
 		</Container>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;

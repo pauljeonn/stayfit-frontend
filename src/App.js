@@ -4,8 +4,9 @@ import ExercisePage from './pages/ExercisePage';
 import SettingsPage from './pages/SettingsPage';
 import EditPage from './pages/EditPage';
 import AddPage from './pages/AddPage';
-import styled from 'styled-components';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import styled from 'styled-components';
 
 const Container = styled.div`
 	height: 100vh;
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/add" element={<AddPage />} />
 					<Route path="/edit/:id" element={<EditPage />} />
 					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegisterPage />} />
 				</Routes>
 			</BrowserRouter>
 		</Container>
