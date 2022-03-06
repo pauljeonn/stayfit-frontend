@@ -10,7 +10,7 @@ import { getExercises } from '../redux/exercise';
 const Container = styled.div`
 	width: 100%;
 	height: calc(100vh - 80px - 80px);
-	background-color: #e3ffc6;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;

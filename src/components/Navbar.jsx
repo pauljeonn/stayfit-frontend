@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { styles } from '../styles';
+import { MdEqualizer, MdHome, MdSettings } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 100%;
-	height: 80px;
-	background-color: #75ce75;
+	height: ${styles.navbarHeight};
+	background-color: ${styles.themeColor};
 	display: flex;
 `;
 
@@ -21,17 +23,33 @@ const StyledLink = styled(Link)`
 	color: white;
 `;
 
+const NavbarIcon = styled.div`
+	font-size: 32px;
+`;
+
 const Navbar = () => {
 	return (
 		<Container>
 			<NavbarItem>
-				<StyledLink to="/exercise">운동</StyledLink>
+				<StyledLink to="/exercise">
+					<NavbarIcon>
+						<MdEqualizer />
+					</NavbarIcon>
+				</StyledLink>
 			</NavbarItem>
 			<NavbarItem>
-				<StyledLink to="/">홈</StyledLink>
+				<StyledLink to="/">
+					<NavbarIcon>
+						<MdHome />
+					</NavbarIcon>
+				</StyledLink>
 			</NavbarItem>
 			<NavbarItem>
-				<StyledLink to="/settings">세팅</StyledLink>
+				<StyledLink to="/settings">
+					<NavbarIcon>
+						<MdSettings />
+					</NavbarIcon>
+				</StyledLink>
 			</NavbarItem>
 		</Container>
 	);

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { styles } from '../styles';
 
 const Container = styled.div`
 	width: 100%;
-	height: 80px;
-	background-color: #75ce75;
+	height: ${styles.topbarHeight};
+	background-color: ${styles.themeColor};
 	display: flex;
 `;
 

@@ -6,8 +6,7 @@ import axios from 'axios';
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
-	background-color: #cbf0b5;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;

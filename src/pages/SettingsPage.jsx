@@ -4,11 +4,13 @@ import EditCard from '../components/EditCard';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
+import { MdAdd } from 'react-icons/md';
+import { styles } from '../styles';
 
 const Container = styled.div`
 	width: 100%;
 	height: calc(100vh - 80px - 80px);
-	background-color: #cbf0b5;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 `;
@@ -17,7 +19,7 @@ const Wrapper = styled.div`
 	width: 600px;
 	min-width: 400px;
 	max-width: 600px;
-	border: 2px solid #75ce75;
+	border: 2px solid ${styles.themeColor};
 	border-radius: 10px;
 	margin: 20px;
 	padding: 20px;
@@ -30,7 +32,7 @@ const Title = styled.div`
 	width: 400px;
 	height: 50px;
 	border-radius: 15px;
-	background-color: #75ce75;
+	background-color: ${styles.themeColor};
 	color: white;
 	font-size: 26px;
 	font-weight: 500;
@@ -41,7 +43,22 @@ const Title = styled.div`
 `;
 
 const AddButton = styled.button`
+	width: 44px;
+	height: 44px;
+	border: none;
+	border-radius: 50%;
+	background-color: ${styles.themeColor};
+	color: white;
+	font-size: 34px;
 	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	&:hover {
+		filter: brightness(110%);
+	}
 `;
 
 const ExerciseList = styled.div``;
@@ -71,7 +88,9 @@ const SettingsPage = () => {
 		<Container>
 			<Wrapper>
 				<Title>운동 목록</Title>
-				<AddButton onClick={() => navigate('/add')}>운동 추가</AddButton>
+				<AddButton onClick={() => navigate('/add')}>
+					<MdAdd />
+				</AddButton>
 				<ExerciseList>
 					{exercises.map((item) => (
 						<EditCard key={item._id} item={item} />
