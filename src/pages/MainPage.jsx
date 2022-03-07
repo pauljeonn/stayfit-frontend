@@ -33,7 +33,7 @@ const Wrapper = styled.div`
 const DateContainer = styled.div`
 	font-size: 30px;
 	font-weight: 700;
-	color: #75ce75;
+	color: ${styles.subColor};
 	margin-bottom: 30px;
 `;
 

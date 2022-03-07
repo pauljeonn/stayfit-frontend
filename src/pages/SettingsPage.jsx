@@ -20,11 +20,11 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-	width: 600px;
+	width: 50%;
 	min-width: 400px;
 	max-width: 600px;
 	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
-	border: 2px solid ${styles.themeColor};
+	border: 2px solid ${styles.subColor};
 	border-radius: 10px;
 	margin: 20px;
 	padding: 20px;
@@ -37,7 +37,7 @@ const Title = styled.div`
 	width: 400px;
 	height: 50px;
 	border-radius: 15px;
-	background-color: ${styles.themeColor};
+	background-color: ${styles.subColor};
 	color: white;
 	font-size: 26px;
 	font-weight: 500;
@@ -52,7 +52,7 @@ const AddButton = styled.button`
 	height: 44px;
 	border: none;
 	border-radius: 50%;
-	background-color: ${styles.themeColor};
+	background-color: ${styles.subColor};
 	color: white;
 	font-size: 34px;
 	margin-bottom: 10px;

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../redux/auth';
 import styled from 'styled-components';
 import { styles } from '../styles';
@@ -104,9 +104,6 @@ const LoginPage = () => {
 	const email = useRef();
 	const password = useRef();
 
-	// 유저 상태 조회
-	const user = useSelector((state) => state.auth.user);
-
 	// 로그인
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -115,7 +112,6 @@ const LoginPage = () => {
 		dispatch(
 			login({ email: email.current.value, password: password.current.value })
 		);
-		console.log(user);
 	};
 
 	return (

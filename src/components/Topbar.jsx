@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { styles } from '../styles';
@@ -15,6 +16,8 @@ const TopbarItem = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: white;
+	font-size: 18px;
 `;
 
 const StyledLink = styled(Link)`
@@ -24,13 +27,12 @@ const StyledLink = styled(Link)`
 
 const TopbarLogo = styled.h1`
 	font-family: 'Rampart One', cursive;
-	/* font-family: 'Bungee', cursive; */
-	/* font-family: 'Faster One', cursive; */
-	/* font-family: 'Strait', sans-serif; */
 	font-size: 50px;
 `;
 
 const Topbar = () => {
+	const user = useSelector((state) => state.auth.user);
+
 	return (
 		<Container>
 			<TopbarItem></TopbarItem>
@@ -39,7 +41,7 @@ const Topbar = () => {
 					<TopbarLogo>STAYFIT</TopbarLogo>
 				</StyledLink>
 			</TopbarItem>
-			<TopbarItem>Hi there!</TopbarItem>
+			<TopbarItem>{`안녕하세요, ${user.firstName}님`}</TopbarItem>
 		</Container>
 	);
 };

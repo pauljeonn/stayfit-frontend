@@ -9,7 +9,7 @@ export const login = createAsyncThunk('auth/login', async (user) => {
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		user: {},
+		user: null,
 		pending: false,
 		error: false,
 	},
