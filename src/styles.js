@@ -6,6 +6,7 @@ export const styles = {
 	errColor: '#ff6f6f',
 	lightGrayColor: '#ddd',
 	grayColor: '#aaa',
+	darkGrayColor: '#555',
 
 	// Dimensions
 	topbarHeight: '90px',

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
@@ -20,42 +20,50 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-	width: 50%;
-	min-width: 400px;
-	max-width: 600px;
+	width: 100%;
 	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
-	border: 2px solid ${styles.subColor};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const Inner = styled.div`
+	width: 100%;
+	min-width: 400px;
+	max-width: 500px;
+	height: 90%;
+	border: 3px solid ${styles.themeColor};
 	border-radius: 10px;
-	margin: 20px;
-	padding: 20px;
+	background-color: white;
+	padding: 30px 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 `;
 
 const Title = styled.div`
-	width: 400px;
-	height: 50px;
-	border-radius: 15px;
-	background-color: ${styles.subColor};
+	width: 100%;
+	height: 60px;
+	border-radius: 5px;
+	background-color: ${styles.themeColor};
 	color: white;
 	font-size: 26px;
 	font-weight: 500;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 `;
 
 const AddButton = styled.button`
-	width: 44px;
-	height: 44px;
+	width: 50px;
+	height: 50px;
 	border: none;
 	border-radius: 50%;
-	background-color: ${styles.subColor};
+	background-color: ${styles.themeColor};
 	color: white;
-	font-size: 34px;
-	margin-bottom: 10px;
+	font-size: 38px;
+	margin-bottom: 15px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -66,7 +74,9 @@ const AddButton = styled.button`
 	}
 `;
 
-const ExerciseList = styled.div``;
+const ExerciseList = styled.div`
+	width: 100%;
+`;
 
 const SettingsPage = () => {
 	const navigate = useNavigate();
@@ -87,15 +97,17 @@ const SettingsPage = () => {
 		<Container>
 			<Topbar />
 			<Wrapper>
-				<Title>운동 목록</Title>
-				<AddButton onClick={() => navigate('/add')}>
-					<MdAdd />
-				</AddButton>
-				<ExerciseList>
-					{exercises.map((item) => (
-						<EditCard key={item._id} item={item} />
-					))}
-				</ExerciseList>
+				<Inner>
+					<Title>운동 목록</Title>
+					<AddButton onClick={() => navigate('/add')}>
+						<MdAdd />
+					</AddButton>
+					<ExerciseList>
+						{exercises.map((item) => (
+							<EditCard key={item._id} item={item} />
+						))}
+					</ExerciseList>
+				</Inner>
 			</Wrapper>
 			<Navbar />
 		</Container>
