@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { styles } from '../styles';
 import { FaCheck } from 'react-icons/fa';
 
 const Container = styled.div`
-	width: 400px;
+	width: 100%;
 	height: 100px;
-	margin-top: 10px;
-	border: 1px solid black;
+	border: 2px solid ${styles.themeColor};
 	border-radius: 10px;
 	background-color: white;
-	color: black;
-	padding: 20px;
+	font-size: 17px;
+	padding: 0 25px;
+	margin-bottom: 15px;
 	display: flex;
 	align-items: center;
 `;
 
 const Checkbox = styled.div`
-	width: 25px;
-	height: 25px;
-	border: 2px solid darkgray;
-	border-radius: 5px;
-	margin-right: 25px;
+	width: 26px;
+	height: 26px;
+	border: 2px solid ${styles.themeColor};
+	border-radius: 2px;
+	margin-right: 16px;
 	cursor: pointer;
 `;
 
@@ -31,17 +32,27 @@ const CheckboxIcon = styled.div`
 	align-items: center;
 	justify-content: center;
 	font-size: 18px;
-	color: black;
+	color: ${styles.themeColor};
 	display: ${(props) => (props.isChecked ? '' : 'none')};
 `;
 
 const ExerciseDetail = styled.div`
 	display: flex;
 	flex-direction: column;
-	color: ${(props) => (props.isChecked ? 'darkgray' : 'black')};
+	color: ${(props) =>
+		props.isChecked ? `${styles.grayColor}` : `${styles.darkGrayColor}`};
 `;
 
-const ExerciseCard = ({ title, desc }) => {
+const ExerciseTitle = styled.div`
+	font-size: 18px;
+	margin-bottom: 5px;
+`;
+
+const ExerciseDesc = styled.div`
+	font-size: 15px;
+`;
+
+const MainCard = ({ title, desc }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	const toggleCheckbox = () => {
@@ -56,11 +67,11 @@ const ExerciseCard = ({ title, desc }) => {
 				</CheckboxIcon>
 			</Checkbox>
 			<ExerciseDetail isChecked={isChecked}>
-				<div>{title}</div>
-				<div>{desc}</div>
+				<ExerciseTitle>{title}</ExerciseTitle>
+				<ExerciseDesc>{desc}</ExerciseDesc>
 			</ExerciseDetail>
 		</Container>
 	);
 };
 
-export default ExerciseCard;
+export default MainCard;

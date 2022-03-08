@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getExercises } from '../redux/exercise';
 import Topbar from '../components/Topbar';
 import Navbar from '../components/Navbar';
-import ExerciseCard from '../components/ExerciseCard';
+import MainCard from '../components/MainCard';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import dayjs from 'dayjs';
@@ -21,8 +21,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 	width: 50%;
-	min-width: 400px;
-	max-width: 600px;
+	min-width: 300px;
+	max-width: 500px;
 	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
 	padding: 20px;
 	display: flex;
@@ -34,7 +34,7 @@ const DateContainer = styled.div`
 	font-size: 30px;
 	font-weight: 700;
 	color: ${styles.subColor};
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 `;
 
 const ClockContainer = styled.div`
@@ -43,7 +43,16 @@ const ClockContainer = styled.div`
 	color: #75ce75;
 `;
 
-const ExerciseList = styled.div``;
+const ExerciseList = styled.div`
+	width: 100%;
+	min-width: 400px;
+	max-width: 500px;
+	border-radius: 10px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
 
 // 메인 페이지 컴포넌트
 const MainPage = () => {
@@ -92,11 +101,11 @@ const MainPage = () => {
 							// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기
 							if (exercise.days[Number(dayjs(date).format('d'))]) {
 								return (
-									<ExerciseCard
+									<MainCard
 										key={exercise._id}
 										title={exercise.title}
 										desc={exercise.desc}
-									></ExerciseCard>
+									></MainCard>
 								);
 							}
 							return null;

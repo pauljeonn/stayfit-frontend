@@ -162,6 +162,7 @@ const EditPage = () => {
 	const [title, setTitle] = useState(location.state.title);
 	const [desc, setDesc] = useState(location.state.desc);
 	const [days, setDays] = useState(location.state.days);
+
 	const dayNames = {
 		0: '일',
 		1: '월',
@@ -190,19 +191,17 @@ const EditPage = () => {
 	};
 
 	// 운동 저장
-	const handleSave = () => {
+	const handleSubmit = () => {
 		const editedExercise = {
-			userId: 1,
 			title,
 			desc,
 			days,
 		};
 
 		try {
-			// 수정된 운동 데이터 적용
+			// 수정된 운동 정보 적용
 			dispatch(editExercise([location.state._id, editedExercise]));
-			// 운동 수정 완료 후 SettingsPage로 이동
-			navigate(-1);
+			navigate('/settings');
 		} catch (err) {
 			console.log(err);
 		}
@@ -212,8 +211,7 @@ const EditPage = () => {
 	const handleDelete = () => {
 		try {
 			dispatch(deleteExercise(location.state._id));
-			// SettingsPage로 이동
-			navigate(-1);
+			navigate('/settings');
 		} catch (err) {
 			console.log(err);
 		}
@@ -230,7 +228,7 @@ const EditPage = () => {
 							<MdDelete />
 						</DeleteIcon>
 					</DeleteContainer>
-					<ExerciseForm>
+					<ExerciseForm onSubmit={handleSubmit}>
 						<ExerciseLabel>운동 이름</ExerciseLabel>
 						<ExerciseInput value={title} onChange={changeTitle} />
 						<ExerciseLabel>목표</ExerciseLabel>
@@ -248,8 +246,8 @@ const EditPage = () => {
 							))}
 						</ExerciseDays>
 						<Buttons>
-							<CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
-							<SaveBtn onClick={handleSave}>저장</SaveBtn>
+							<CancelBtn onClick={() => navigate('/settings')}>취소</CancelBtn>
+							<SaveBtn type="submit">저장</SaveBtn>
 						</Buttons>
 					</ExerciseForm>
 				</Inner>

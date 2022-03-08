@@ -14,10 +14,10 @@ const Container = styled.div`
 const TopbarItem = styled.div`
 	flex: 1;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	color: white;
-	font-size: 18px;
+	font-size: 20px;
 `;
 
 const StyledLink = styled(Link)`
@@ -25,7 +25,7 @@ const StyledLink = styled(Link)`
 	color: white;
 `;
 
-const TopbarLogo = styled.h1`
+const TopbarLogo = styled.div`
 	font-family: 'Rampart One', cursive;
 	font-size: 50px;
 `;

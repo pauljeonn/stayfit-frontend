@@ -9,6 +9,6 @@ export const styles = {
 	darkGrayColor: '#555',
 
 	// Dimensions
-	topbarHeight: '90px',
+	topbarHeight: '95px',
 	navbarHeight: '80px',
 };

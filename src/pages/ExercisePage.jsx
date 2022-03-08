@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import ExerciseCard from '../components/ExerciseCard';
-import { exerciseData } from '../data';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -32,11 +30,7 @@ const ExercisePage = () => {
 
 	return (
 		<Container>
-			<Wrapper>
-				{exerciseData.map((item) => (
-					<ExerciseCard key={item.id} type={item.type} count={item.count} />
-				))}
-			</Wrapper>
+			<Wrapper></Wrapper>
 		</Container>
 	);
 };
