@@ -18,8 +18,6 @@ const Container = styled.div`
 function App() {
 	const user = useSelector((state) => state.auth.user);
 
-	console.log(user);
-
 	return (
 		<Container>
 			<BrowserRouter>
@@ -30,7 +28,10 @@ function App() {
 						element={user ? <MainPage /> : <Navigate to="/login" />}
 					/>
 					<Route path="/exercise" element={<ExercisePage />} />
-					<Route path="/settings" element={<SettingsPage />} />
+					<Route
+						path="/settings"
+						element={user ? <SettingsPage /> : <Navigate to="/" />}
+					/>
 					<Route
 						path="/add"
 						element={user ? <AddPage /> : <Navigate to="/" />}

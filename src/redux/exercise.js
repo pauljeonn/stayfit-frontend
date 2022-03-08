@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunk (try & catch 로직이 자동으로 포함되어 있다)
+// Thunk (try & catch 로직이 자동으로 포함되어 있음)
 export const getExercises = createAsyncThunk(
 	'exercise/getExercises',
-	async () => {
-		const res = await axios.get('http://localhost:3000/exercises');
+	async (userId) => {
+		const res = await axios.get(`http://localhost:3000/exercises/${userId}`);
 		return res.data;
 	}
 );
@@ -43,7 +43,7 @@ export const deleteExercise = createAsyncThunk(
 export const exerciseSlice = createSlice({
 	name: 'exercise',
 	initialState: {
-		exercises: [],
+		exercises: null,
 		pending: false,
 		error: false,
 	},

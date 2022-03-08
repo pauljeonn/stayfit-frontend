@@ -72,22 +72,16 @@ const SettingsPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// 로컬 state
-	const [exercises, setExercises] = useState([]);
+	// const [exercises, setExercises] = useState([]);
 
-	// 글로벌 state
-	const exerciseState = useSelector((state) => state.exercise.exercises);
+	const user = useSelector((state) => state.auth.user);
+	const exercises = useSelector((state) => state.exercise.exercises);
 
-	// 운동 데이터 가져오기
+	// 현재 유저의 운동 데이터 가져오기
 	useEffect(() => {
-		console.log(exerciseState);
-		// exerciseState가 비어있으면 데이터 불러오기
-		if (!exerciseState.length) {
-			dispatch(getExercises());
-		} else {
-			setExercises(exerciseState);
-		}
-	}, [dispatch, exerciseState]);
+		dispatch(getExercises(user._id));
+		console.log('GET EXERCISES');
+	}, []);
 
 	return (
 		<Container>

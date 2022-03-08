@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addExercise } from '../redux/exercise';
 import Navbar from '../components/Navbar';
 import Topbar from '../components/Topbar';
@@ -137,6 +137,8 @@ const AddPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const user = useSelector((state) => state.auth.user);
+
 	const [title, setTitle] = useState('');
 	const [desc, setDesc] = useState('');
 	const [days, setDays] = useState([
@@ -176,9 +178,11 @@ const AddPage = () => {
 		setStrDays(JSON.stringify(temp)); // 리렌더링 위해서 사용
 	};
 
-	const handleSumbit = () => {
+	const handleSumbit = (e) => {
+		e.preventDefault();
+
 		const newExercise = {
-			userId: 1,
+			userId: user._id,
 			title,
 			desc,
 			days,
@@ -187,7 +191,7 @@ const AddPage = () => {
 		// addExercise 액션 호출
 		dispatch(addExercise(newExercise));
 		// 운동 추가 후 SettingsPage로 이동
-		navigate(-1);
+		navigate('/settings');
 	};
 
 	return (
@@ -222,7 +226,7 @@ const AddPage = () => {
 							))}
 						</ExerciseDays>
 						<ButtonContainer>
-							<CancelBtn onClick={() => navigate(-1)}>취소</CancelBtn>
+							<CancelBtn onClick={() => navigate('/settings')}>취소</CancelBtn>
 							<SaveBtn type="submit">저장</SaveBtn>
 						</ButtonContainer>
 					</ExerciseForm>
