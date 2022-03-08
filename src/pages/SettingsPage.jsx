@@ -103,9 +103,8 @@ const SettingsPage = () => {
 						<MdAdd />
 					</AddButton>
 					<ExerciseList>
-						{exercises.map((item) => (
-							<EditCard key={item._id} item={item} />
-						))}
+						{exercises &&
+							exercises.map((item) => <EditCard key={item._id} item={item} />)}
 					</ExerciseList>
 				</Inner>
 			</Wrapper>

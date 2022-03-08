@@ -69,11 +69,11 @@ const ExerciseLabel = styled.label`
 const ExerciseInput = styled.input`
 	width: 100%;
 	height: 35px;
-	padding-left: 10px;
 	border: none;
 	border-radius: 5px;
 	background-color: ${styles.lightGrayColor};
 	outline: none;
+	padding-left: 10px;
 	margin-bottom: 20px;
 `;
 
@@ -131,6 +131,10 @@ const SaveBtn = styled.button`
 	font-weight: 600;
 	margin-left: 10px;
 	cursor: pointer;
+
+	&:hover {
+		filter: brightness(110%);
+	}
 `;
 
 const AddPage = () => {

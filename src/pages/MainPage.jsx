@@ -87,19 +87,20 @@ const MainPage = () => {
 				</DateContainer>
 				{/* <ClockContainer>{dayjs(date).format('A h:mm')}</ClockContainer> */}
 				<ExerciseList>
-					{exercises.map((exercise) => {
-						// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기
-						if (exercise.days[Number(dayjs(date).format('d'))]) {
-							return (
-								<ExerciseCard
-									key={exercise._id}
-									title={exercise.title}
-									desc={exercise.desc}
-								></ExerciseCard>
-							);
-						}
-						return null;
-					})}
+					{exercises &&
+						exercises.map((exercise) => {
+							// 오늘 요일 위치에 운동 요일 배열의 요소값이 true면 리스트에 보여주기
+							if (exercise.days[Number(dayjs(date).format('d'))]) {
+								return (
+									<ExerciseCard
+										key={exercise._id}
+										title={exercise.title}
+										desc={exercise.desc}
+									></ExerciseCard>
+								);
+							}
+							return null;
+						})}
 				</ExerciseList>
 			</Wrapper>
 			<Navbar />
