@@ -40,6 +40,17 @@ export const deleteExercise = createAsyncThunk(
 	}
 );
 
+export const toggleDone = createAsyncThunk(
+	'exercise/toggleDone',
+	async (requestData) => {
+		const res = await axios.put(
+			`http://localhost:3000/exercises/${requestData[0]}/done`,
+			requestData[1]
+		);
+		return res.data;
+	}
+);
+
 export const exerciseSlice = createSlice({
 	name: 'exercise',
 	initialState: {
@@ -99,6 +110,20 @@ export const exerciseSlice = createSlice({
 			);
 		},
 		[deleteExercise.rejected]: (state) => {
+			state.pending = false;
+			state.error = true;
+		},
+		[toggleDone.pending]: (state) => {
+			state.pending = true;
+			state.error = false;
+		},
+		[toggleDone.fulfilled]: (state, action) => {
+			state.pending = false;
+			state.exercises = state.exercises.map((exercise) =>
+				exercise._id === action.payload._id ? action.payload : exercise
+			);
+		},
+		[toggleDone.rejected]: (state) => {
 			state.pending = false;
 			state.error = true;
 		},

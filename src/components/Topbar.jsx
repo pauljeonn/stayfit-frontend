@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { styles } from '../styles';
+import { MdArrowDropDown, MdLogout } from 'react-icons/md';
 
 const Container = styled.div`
 	width: 100%;
@@ -30,6 +31,13 @@ const TopbarLogo = styled.div`
 	font-size: 50px;
 `;
 
+const Dropdown = styled.div`
+	font-size: 28px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+`;
+
 const Topbar = () => {
 	const user = useSelector((state) => state.auth.user);
 
@@ -41,7 +49,12 @@ const Topbar = () => {
 					<TopbarLogo>STAYFIT</TopbarLogo>
 				</StyledLink>
 			</TopbarItem>
-			<TopbarItem>{`안녕하세요, ${user.firstName}님`}</TopbarItem>
+			<TopbarItem>
+				{`안녕하세요, ${user.firstName}님`}
+				<Dropdown>
+					<MdArrowDropDown />
+				</Dropdown>
+			</TopbarItem>
 		</Container>
 	);
 };

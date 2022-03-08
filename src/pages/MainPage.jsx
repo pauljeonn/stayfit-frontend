@@ -103,8 +103,10 @@ const MainPage = () => {
 								return (
 									<MainCard
 										key={exercise._id}
+										id={exercise._id}
 										title={exercise.title}
 										desc={exercise.desc}
+										done={exercise.done}
 									></MainCard>
 								);
 							}
