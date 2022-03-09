@@ -39,6 +39,12 @@ const Inner = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
 `;
 
 const Title = styled.div`

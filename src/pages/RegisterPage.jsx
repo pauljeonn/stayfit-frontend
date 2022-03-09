@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { styles } from '../styles';
@@ -55,7 +56,7 @@ const Logo = styled.div`
 const RegisterForm = styled.form`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 45px;
+	margin-bottom: 40px;
 `;
 
 const RegisterInput = styled.input`
@@ -78,11 +79,19 @@ const RegisterBtn = styled.button`
 	font-size: 18px;
 	font-weight: 600;
 	margin-top: 12px;
+	margin-bottom: 6px;
 	cursor: pointer;
 
 	&:hover {
 		filter: brightness(110%);
 	}
+`;
+
+const ErrorText = styled.div`
+	width: 240px;
+	color: ${styles.errColor};
+	font-size: 13px;
+	margin
 `;
 
 const LoginText = styled.div`
@@ -98,8 +107,62 @@ const LoginText = styled.div`
 const RegisterPage = () => {
 	const navigate = useNavigate();
 
-	const handleRegister = (e) => {
+	const [isError, setIsError] = useState(false);
+	const [error, setError] = useState('');
+
+	const [lastName, setLastName] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirm, setPasswordConfirm] = useState('');
+
+	const changeLastName = (e) => {
+		setLastName(e.target.value);
+	};
+
+	const changeFirstName = (e) => {
+		setFirstName(e.target.value);
+	};
+
+	const changeEmail = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const changePassword = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const changePasswordConfirm = (e) => {
+		setPasswordConfirm(e.target.value);
+	};
+
+	const handleRegister = async (e) => {
 		e.preventDefault();
+
+		// 비밀번호 비교 후 새 유저 객체 생성
+		if (password !== passwordConfirm) {
+			setIsError(true);
+			setError('비밀번호가 불일치합니다.');
+		} else {
+			const newUser = {
+				lastName,
+				firstName,
+				email,
+				password,
+			};
+
+			try {
+				// 회원 등록
+				await axios.post('/auth/register', newUser);
+				console.log('성공적으로 가입되었습니다.');
+				// 로그인 페이지로 이동
+				navigate('/login');
+			} catch (err) {
+				console.log(err);
+				setIsError(true);
+				setError('회원가입에 실패하였습니다. 다른 이메일 주소를 시도해보세요.');
+			}
+		}
 	};
 
 	return (
@@ -112,12 +175,43 @@ const RegisterPage = () => {
 					<RegisterContainer>
 						<Logo>STAYFIT</Logo>
 						<RegisterForm onSubmit={handleRegister}>
-							<RegisterInput placeholder="성" />
-							<RegisterInput placeholder="이름" />
-							<RegisterInput type="email" placeholder="이메일" />
-							<RegisterInput type="password" placeholder="비밀번호" />
-							<RegisterInput type="password" placeholder="비밀번호 확인" />
+							<RegisterInput
+								placeholder="성"
+								value={lastName}
+								onChange={(e) => changeLastName(e)}
+								required
+							/>
+							<RegisterInput
+								placeholder="이름"
+								value={firstName}
+								onChange={(e) => changeFirstName(e)}
+								required
+							/>
+							<RegisterInput
+								type="email"
+								placeholder="이메일"
+								value={email}
+								onChange={(e) => changeEmail(e)}
+								required
+							/>
+							<RegisterInput
+								type="password"
+								placeholder="비밀번호"
+								value={password}
+								onChange={(e) => changePassword(e)}
+								minLength="6"
+								required
+							/>
+							<RegisterInput
+								type="password"
+								placeholder="비밀번호 확인"
+								value={passwordConfirm}
+								onChange={(e) => changePasswordConfirm(e)}
+								minLength="6"
+								required
+							/>
 							<RegisterBtn type="submit">회원가입</RegisterBtn>
+							{isError && <ErrorText>{error}</ErrorText>}
 						</RegisterForm>
 						<LoginText onClick={() => navigate('/login')}>
 							이미 회원이신가요?

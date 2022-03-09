@@ -222,7 +222,7 @@ const EditPage = () => {
 			<Topbar />
 			<Wrapper>
 				<Inner>
-					<Title>운동 수정</Title>
+					<Title>운동 편집</Title>
 					<DeleteContainer>
 						<DeleteIcon onClick={handleDelete}>
 							<MdDelete />

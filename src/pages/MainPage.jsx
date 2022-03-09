@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
 const Container = styled.div`
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	background-color: white;
 	display: flex;
@@ -20,14 +20,19 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-	width: 50%;
-	min-width: 300px;
-	max-width: 500px;
+	width: 100%;
 	height: calc(100vh - ${styles.topbarHeight} - ${styles.navbarHeight});
 	padding: 20px;
+	margin: 5px 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
 `;
 
 const DateContainer = styled.div`
@@ -45,8 +50,8 @@ const ClockContainer = styled.div`
 
 const ExerciseList = styled.div`
 	width: 100%;
-	min-width: 400px;
-	max-width: 500px;
+	min-width: 300px;
+	max-width: 380px;
 	border-radius: 10px;
 	background-color: white;
 	display: flex;

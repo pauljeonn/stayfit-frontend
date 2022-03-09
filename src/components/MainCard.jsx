@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 const Container = styled.div`
 	width: 100%;
-	height: 100px;
+	height: 90px;
 	border: 2px solid ${styles.themeColor};
 	border-radius: 10px;
 	background-color: white;
