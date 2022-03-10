@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+![이미지](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-hero3.svg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# STAYFIT
 
-## Available Scripts
+가장 쉬운 건겅관리의 첫걸음
 
-In the project directory, you can run:
+## Introduction
 
-### `npm start`
+의지가 부족해서, 또는 바쁘다는 이유로 운동 계획이 항상 작심삼일로 끝나버리는 사람들을 위하여 제작한 앱 입니다. 사용자가 오늘 완료해야 하는 운동에만 집중할 수 있도록 직관적이고 미니멀한 UI를 적용하였습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **운동 생성** - 사용자는 새로운 운동을 추가할 수 있습니다. 운동을 추가하면 자동으로 목록이 업데이트 됩니다.
+- **운동 편집** - 사용자는 운동을 추가할 때 지정한 운동 이름, 목표, 요일을 수정할 수 있습니다.
+- **운동 삭제** - 사용자는 생성한 운동을 삭제할 수 있습니다.
+- **운동 완료 / 완료 취소** - 메인 화면에서 목록에 있는 운동의 체크박스를 클릭하면 체크 표시가 생기며 해당 운동이 완료됩니다. 다시 클릭하면 체크 표시가 사라지며 미완료 상태로 변경됩니다.
+- **회원가입** - 회원가입 페이지에서 새로운 계정을 생성할 수 있습니다.
+- **로그인** - 로그인 페이지에서 존재하는 계정으로 로그인 할 수 있습니다.
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Language: `JavaScript`
+- Frontend: `React`, `Redux`, `redux-persist`, `styled-components`, `day.js`, `react-icons`
+- Backend: `Node.js`, `express`, `mongoose`, `dotenv`, `bcrypt`
+- Database: `MongoDB`
+- [백엔드 Repository](https://github.com/pauljeonn/stayfit-backend)
 
-### `npm run build`
+## Contribution
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+@pauljeonn (개인 프로젝트)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## What I Learned
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Redux, React Redux, Redux Toolkit을 사용하여 전역 상태 관리
+- React Redux에서 제공하는 useSelector 및 useDispatch Hook을 통해 상태 추출 및 액션 호출
+- Redux Toolkit에서 제공하는 createSlice 함수를 통해 액션 및 리듀서 기능 구현
+- Redux Toolkit에서 제공하는 createAsyncThunk 함수를 통해 비동기 작업 처리
+- Redux Persist 라이브러리를 통해 localStorage에 리듀서 상태 저장 (새로고침 시 로그인 유지)
+- Day.js 라이브러리 사용하여 날짜 포매팅 및 표시
+- Mongoose 라이브러리를 사용하여 NoSQL 스키마 정의 및 모델 생성
+- Mongoose Query를 사용하여 MongoDB와 연동된 데이터 조작
+- bcrypt 라이브러리 통해 암호 해시화 및 보안 강화
+- Postman 사용하여 REST API 테스트 진행
 
-### `npm run eject`
+## Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. 운동 완료 / 운동 취소
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![완료](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-done.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. 운동 생성
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![생성](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-add.gif)
 
-## Learn More
+### 3. 운동 편집
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![편집](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-edit.gif)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. 운동 삭제
 
-### Code Splitting
+![삭제](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-delete.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 7. 회원가입
 
-### Analyzing the Bundle Size
+![회원가입](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-register.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 8. 로그인
 
-### Making a Progressive Web App
+![로그인](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-login.gif)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 9. 로그아웃
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![로그아웃](https://pauljeon.s3.ap-northeast-2.amazonaws.com/stayfit-logout.gif)

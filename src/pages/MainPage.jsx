@@ -36,16 +36,17 @@ const Wrapper = styled.div`
 `;
 
 const DateContainer = styled.div`
-	font-size: 30px;
+	font-size: 36px;
 	font-weight: 700;
 	color: ${styles.subColor};
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 `;
 
 const ClockContainer = styled.div`
-	font-size: 60px;
+	font-size: 40px;
 	font-weight: 700;
 	color: #75ce75;
+	margin-bottom: 25px;
 `;
 
 const ExerciseList = styled.div`
@@ -98,7 +99,7 @@ const MainPage = () => {
 				<DateContainer>
 					{dayjs(date).format('YYYY년 M월 D일 dddd')}
 				</DateContainer>
-				{/* <ClockContainer>{dayjs(date).format('A h:mm')}</ClockContainer> */}
+				{/* <ClockContainer>{dayjs(date).format('A h시 mm분')}</ClockContainer> */}
 				<ExerciseList>
 					{exercises &&
 						exercises.map((exercise) => {
