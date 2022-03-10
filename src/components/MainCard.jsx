@@ -63,7 +63,7 @@ const MainCard = ({ id, title, desc, done }) => {
 	let today = dayjs().format('YYYYMMDD');
 
 	useEffect(() => {
-		// 해당 운동이 오늘 날짜에 완료되었는지 확인
+		// 컴포넌트 로드 시 해당 운동이 오늘 날짜에 완료되었는지 확인
 		if (done.includes(today)) {
 			setIsChecked(true);
 		}

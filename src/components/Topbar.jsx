@@ -1,6 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/auth';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import { MdArrowDropDown, MdLogout } from 'react-icons/md';
@@ -31,15 +32,56 @@ const TopbarLogo = styled.div`
 	font-size: 50px;
 `;
 
-const Dropdown = styled.div`
+const DropdownIcon = styled.div`
 	font-size: 28px;
 	display: flex;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+`;
+
+const Dropdown = styled.div`
+	width: 140px;
+	height: 50px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+	position: absolute;
+	bottom: -60px;
+	right: 5px;
+	display: ${(props) => (props.isDropdown ? 'flex' : 'none')};
+	justify-content: center;
+`;
+
+const Logout = styled.div`
+	color: ${styles.darkGrayColor};
+	font-size: 17px;
+	display: flex;
+	justify-content: right;
 	align-items: center;
 	cursor: pointer;
 `;
 
+const LogoutIcon = styled.div`
+	font-size: 20px;
+	margin-right: 8px;
+	display: flex;
+	align-items: center;
+`;
+
 const Topbar = () => {
 	const user = useSelector((state) => state.auth.user);
+	const dispatch = useDispatch();
+
+	const [isDropdown, setIsDropdown] = useState(false);
+
+	const toggleDropdown = () => {
+		setIsDropdown(!isDropdown);
+	};
+
+	const handleLogout = () => {
+		dispatch(logout());
+	};
 
 	return (
 		<Container>
@@ -51,9 +93,17 @@ const Topbar = () => {
 			</TopbarItem>
 			<TopbarItem>
 				{`안녕하세요, ${user.firstName}님`}
-				<Dropdown>
+				<DropdownIcon onClick={toggleDropdown}>
 					<MdArrowDropDown />
-				</Dropdown>
+					<Dropdown isDropdown={isDropdown}>
+						<Logout onClick={handleLogout}>
+							<LogoutIcon>
+								<MdLogout />
+							</LogoutIcon>
+							로그아웃
+						</Logout>
+					</Dropdown>
+				</DropdownIcon>
 			</TopbarItem>
 		</Container>
 	);
