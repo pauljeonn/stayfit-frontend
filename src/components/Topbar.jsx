@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/auth';
+import { clearExercise } from '../redux/exercise';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import { MdArrowDropDown, MdLogout } from 'react-icons/md';
@@ -80,7 +81,9 @@ const Topbar = () => {
 	};
 
 	const handleLogout = () => {
+		// 유저 및 운동 상태 비우기
 		dispatch(logout());
+		dispatch(clearExercise());
 	};
 
 	return (
@@ -95,8 +98,8 @@ const Topbar = () => {
 				{`안녕하세요, ${user.firstName}님`}
 				<DropdownIcon onClick={toggleDropdown}>
 					<MdArrowDropDown />
-					<Dropdown isDropdown={isDropdown}>
-						<Logout onClick={handleLogout}>
+					<Dropdown isDropdown={isDropdown} onClick={handleLogout}>
+						<Logout>
 							<LogoutIcon>
 								<MdLogout />
 							</LogoutIcon>

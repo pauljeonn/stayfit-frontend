@@ -5,7 +5,7 @@ import axios from 'axios';
 export const getExercises = createAsyncThunk(
 	'exercise/getExercises',
 	async (userId) => {
-		const res = await axios.get(`http://localhost:3000/exercises/${userId}`);
+		const res = await axios.get(`/exercises/${userId}`);
 		return res.data;
 	}
 );
@@ -13,10 +13,7 @@ export const getExercises = createAsyncThunk(
 export const addExercise = createAsyncThunk(
 	'exercise/addExercise',
 	async (newExercise) => {
-		const res = await axios.post(
-			'http://localhost:3000/exercises',
-			newExercise
-		);
+		const res = await axios.post('/exercises', newExercise);
 		return res.data;
 	}
 );
@@ -24,10 +21,7 @@ export const addExercise = createAsyncThunk(
 export const editExercise = createAsyncThunk(
 	'exercise/editExercise',
 	async (requestData) => {
-		const res = await axios.put(
-			`http://localhost:3000/exercises/${requestData[0]}`,
-			requestData[1]
-		);
+		const res = await axios.put(`/exercises/${requestData[0]}`, requestData[1]);
 		return res.data;
 	}
 );
@@ -35,16 +29,27 @@ export const editExercise = createAsyncThunk(
 export const deleteExercise = createAsyncThunk(
 	'exercise/deleteExercise',
 	async (exerciseId) => {
-		await axios.delete(`http://localhost:3000/exercises/${exerciseId}`);
+		await axios.delete(`/exercises/${exerciseId}`);
 		return exerciseId;
 	}
 );
 
-export const toggleDone = createAsyncThunk(
-	'exercise/toggleDone',
+export const addDone = createAsyncThunk(
+	'exercise/addDone',
 	async (requestData) => {
 		const res = await axios.put(
-			`http://localhost:3000/exercises/${requestData[0]}/done`,
+			`/exercises/${requestData[0]}/done`,
+			requestData[1]
+		);
+		return res.data;
+	}
+);
+
+export const removeDone = createAsyncThunk(
+	'exercise/removeDone',
+	async (requestData) => {
+		const res = await axios.put(
+			`/exercises/${requestData[0]}/undo`,
 			requestData[1]
 		);
 		return res.data;
@@ -58,7 +63,12 @@ export const exerciseSlice = createSlice({
 		pending: false,
 		error: false,
 	},
-	reducers: {},
+	reducers: {
+		clearExercise: (state) => {
+			state.exercises = null;
+		},
+	},
+	// immer 지원
 	extraReducers: {
 		[getExercises.pending]: (state) => {
 			state.pending = true;
@@ -67,6 +77,7 @@ export const exerciseSlice = createSlice({
 		[getExercises.fulfilled]: (state, action) => {
 			state.pending = false;
 			state.exercises = action.payload;
+			state.error = false;
 		},
 		[getExercises.rejected]: (state) => {
 			state.pending = false;
@@ -113,22 +124,36 @@ export const exerciseSlice = createSlice({
 			state.pending = false;
 			state.error = true;
 		},
-		[toggleDone.pending]: (state) => {
+		[addDone.pending]: (state) => {
 			state.pending = true;
 			state.error = false;
 		},
-		[toggleDone.fulfilled]: (state, action) => {
+		[addDone.fulfilled]: (state, action) => {
 			state.pending = false;
 			state.exercises = state.exercises.map((exercise) =>
 				exercise._id === action.payload._id ? action.payload : exercise
 			);
 		},
-		[toggleDone.rejected]: (state) => {
+		[addDone.rejected]: (state) => {
+			state.pending = false;
+			state.error = true;
+		},
+		[removeDone.pending]: (state) => {
+			state.pending = true;
+			state.error = false;
+		},
+		[removeDone.fulfilled]: (state, action) => {
+			state.pending = false;
+			state.exercises = state.exercises.map((exercise) =>
+				exercise._id === action.payload._id ? action.payload : exercise
+			);
+		},
+		[removeDone.rejected]: (state) => {
 			state.pending = false;
 			state.error = true;
 		},
 	},
 });
 
-export const {} = exerciseSlice.actions;
+export const { clearExercise } = exerciseSlice.actions;
 export default exerciseSlice.reducer;

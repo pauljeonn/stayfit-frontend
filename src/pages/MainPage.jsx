@@ -74,7 +74,6 @@ const MainPage = () => {
 	// 현재 유저의 운동 데이터 가져오기
 	useEffect(() => {
 		dispatch(getExercises(user._id));
-		console.log('GET EXERCISES');
 	}, []);
 
 	// 시간 표시

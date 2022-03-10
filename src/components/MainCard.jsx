@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { styles } from '../styles';
 import { FaCheck } from 'react-icons/fa';
-import { toggleDone } from '../redux/exercise';
+import { addDone, removeDone } from '../redux/exercise';
 import dayjs from 'dayjs';
 
 const Container = styled.div`
@@ -58,24 +58,18 @@ const ExerciseDesc = styled.div`
 const MainCard = ({ id, title, desc, done }) => {
 	const dispatch = useDispatch();
 
-	const [isChecked, setIsChecked] = useState(false);
-
 	let today = dayjs().format('YYYYMMDD');
 
-	useEffect(() => {
-		// 컴포넌트 로드 시 해당 운동이 오늘 날짜에 완료되었는지 확인
-		if (done.includes(today)) {
-			setIsChecked(true);
-		}
-	}, []);
+	const [isChecked, setIsChecked] = useState(done.includes(today));
 
 	const toggleCheckbox = () => {
 		if (isChecked) {
 			setIsChecked(false);
+			dispatch(removeDone([id, { doneDate: today }]));
 		} else {
 			setIsChecked(true);
+			dispatch(addDone([id, { doneDate: today }]));
 		}
-		dispatch(toggleDone([id, { doneDate: today }]));
 	};
 
 	return (

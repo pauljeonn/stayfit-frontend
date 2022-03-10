@@ -88,15 +88,12 @@ const SettingsPage = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// const [exercises, setExercises] = useState([]);
-
 	const user = useSelector((state) => state.auth.user);
 	const exercises = useSelector((state) => state.exercise.exercises);
 
 	// 현재 유저의 운동 데이터 가져오기
 	useEffect(() => {
 		dispatch(getExercises(user._id));
-		console.log('GET EXERCISES');
 	}, []);
 
 	return (
