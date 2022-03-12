@@ -31,7 +31,7 @@ const Navbar = () => {
 	return (
 		<Container>
 			<NavbarItem>
-				<StyledLink to="/exercise">
+				<StyledLink to="/stats">
 					<NavbarIcon>
 						<MdEqualizer />
 					</NavbarIcon>

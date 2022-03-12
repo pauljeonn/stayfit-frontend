@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MainPage from './pages/MainPage';
-import ExercisePage from './pages/ExercisePage';
 import SettingsPage from './pages/SettingsPage';
+import StatsPage from './pages/StatsPage';
 import EditPage from './pages/EditPage';
 import AddPage from './pages/AddPage';
 import LoginPage from './pages/LoginPage';
@@ -28,7 +28,7 @@ function App() {
 						// 유저 상태 존재 유무에 따라 redirect
 						element={user ? <MainPage /> : <Navigate to="/login" />}
 					/>
-					<Route path="/exercise" element={<ExercisePage />} />
+					<Route path="/stats" element={<StatsPage />} />
 					<Route
 						path="/settings"
 						element={user ? <SettingsPage /> : <Navigate to="/" />}

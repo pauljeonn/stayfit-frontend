@@ -107,7 +107,9 @@ const SettingsPage = () => {
 					</AddButton>
 					<ExerciseList>
 						{exercises &&
-							exercises.map((item) => <EditCard key={item._id} item={item} />)}
+							exercises.map((exercise) => (
+								<EditCard key={exercise._id} item={exercise} />
+							))}
 					</ExerciseList>
 				</Inner>
 			</Wrapper>
