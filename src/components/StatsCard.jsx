@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { styles } from '../styles';
 
@@ -19,10 +20,14 @@ const Title = styled.div`
 	color: ${styles.darkGrayColor};
 `;
 
-const StatsCard = ({ title }) => {
+const StatsCard = ({ exercise }) => {
+	const navigate = useNavigate();
+
 	return (
-		<Container>
-			<Title>{title}</Title>
+		<Container
+			onClick={() => navigate(`/stats/${exercise._id}`, { state: exercise })}
+		>
+			<Title>{exercise.title}</Title>
 		</Container>
 	);
 };

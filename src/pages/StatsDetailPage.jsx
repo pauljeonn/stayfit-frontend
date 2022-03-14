@@ -1,10 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Navbar from '../components/Navbar';
-import StatsCard from '../components/StatsCard';
 import Topbar from '../components/Topbar';
 import styled from 'styled-components';
 import { styles } from '../styles';
+import { useLocation } from 'react-router-dom';
 
 const Container = styled.div`
 	width: 100vw;
@@ -27,7 +26,7 @@ const Wrapper = styled.div`
 const Outer = styled.div`
 	width: 100%;
 	min-width: 400px;
-	max-width: 500px;
+	max-width: 800px;
 	height: 90%;
 	border: 3px solid ${styles.themeColor};
 	border-radius: 10px;
@@ -64,21 +63,16 @@ const Inner = styled.div`
 	}
 `;
 
-const StatsPage = () => {
-	const exercises = useSelector((state) => state.exercise.exercises);
+const StatsDetailPage = () => {
+	const location = useLocation();
 
 	return (
 		<Container>
 			<Topbar />
 			<Wrapper>
 				<Outer>
-					<Title>운동 기록</Title>
-					<Inner>
-						{exercises &&
-							exercises.map((exercise) => (
-								<StatsCard key={exercise._id} exercise={exercise} />
-							))}
-					</Inner>
+					<Title>DETAIL</Title>
+					<Inner>{location.state.title}</Inner>
 				</Outer>
 			</Wrapper>
 			<Navbar />
@@ -86,4 +80,4 @@ const StatsPage = () => {
 	);
 };
 
-export default StatsPage;
+export default StatsDetailPage;

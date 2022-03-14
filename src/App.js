@@ -8,6 +8,7 @@ import AddPage from './pages/AddPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import styled from 'styled-components';
+import StatsDetailPage from './pages/StatsDetailPage';
 
 const Container = styled.div`
 	width: 100vw;
@@ -29,6 +30,7 @@ function App() {
 						element={user ? <MainPage /> : <Navigate to="/login" />}
 					/>
 					<Route path="/stats" element={<StatsPage />} />
+					<Route path="/stats/:id" element={<StatsDetailPage />} />
 					<Route
 						path="/settings"
 						element={user ? <SettingsPage /> : <Navigate to="/" />}
